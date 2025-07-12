@@ -29,12 +29,9 @@ cookie-hijack-demo/
 │   └── extract_cookie_paths.ps1       ← Locates and extracts cookie files
 ├── python/
 │   └── decrypt_with_browser_cookie3.py← Extracts and decrypts cookies using DPAPI
-├── samples/
-│   └── example_cookie_output.txt      ← Sample cookies (obfuscated)
 ├── detection/
 │   └── edr_detection_tips.md          ← Detection logic for blue teams
-├── images/
-│   └── mfa_cookie_bypass.png          ← Diagrams/screenshots (optional)
+├── mfa_cookie_bypass.png          ← Diagrams/screenshots
 ```
 
 ---
