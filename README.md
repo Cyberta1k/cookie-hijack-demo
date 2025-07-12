@@ -6,6 +6,8 @@ This project demonstrates how Chrome browser cookies can be extracted and abused
 
 > **⚠️ Warning:** This project is for educational and defensive research purposes only.
 
+![MFA Cookie Bypass Flowchart](mfa_cookie_bypass.png)
+
 ---
 
 ## 🧠 What This Project Covers
