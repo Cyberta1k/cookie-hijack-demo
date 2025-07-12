@@ -24,14 +24,15 @@ This project demonstrates how Chrome browser cookies can be extracted and abused
 
 ```
 cookie-hijack-demo/
-├── README.md                          ← You're here
+├── README.md                         ← You're here
 ├── powershell/
-│   └── extract_cookie_paths.ps1       ← Locates and extracts cookie files
+│   └── extract_cookie_paths.ps1      ← Locates and extracts cookie files
 ├── python/
 │   └── decrypt_with_browser_cookie3.py← Extracts and decrypts cookies using DPAPI
 ├── detection/
-│   └── edr_detection_tips.md          ← Detection logic for blue teams
-├── mfa_cookie_bypass.png          ← Diagrams/screenshots
+    └── chrome_cookie_access.yml      ← Detection logic for blue teams
+    └── cookie_extraction_tool.yml          
+├── mfa_cookie_bypass.png             ← Diagrams/screenshots
 ```
 
 ---
