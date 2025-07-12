@@ -1,0 +1,29 @@
+title: Suspicious Access to Chrome Cookie Storage
+id: 9f87bde0-3c6d-4b6e-8a6a-c0d8c57f1f2a
+description: Detects suspicious processes accessing Chrome's encrypted cookie SQLite database, possibly for cookie theft or extraction.
+status: experimental
+author: Abhiraj Singh
+date: 2025/07/12
+references:
+  - https://attack.mitre.org/techniques/T1539/
+  - https://attack.mitre.org/techniques/T1550/003/
+logsource:
+  product: windows
+  service: sysmon
+  definition: 'Detects file access events via Sysmon EventID 11 (FileCreate) or 10 (ProcessAccess)'
+detection:
+  selection_file_access:
+    TargetFilename|endswith: '\Google\Chrome\User Data\Default\Network\Cookies'
+  selection_process:
+    EventID:
+      - 10
+      - 11
+  condition: selection_file_access and selection_process
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1539
+  - attack.t1550.003
+falsepositives:
+  - Backup software or antivirus scanning Chrome profiles
+  - Legitimate browser or profile managers
