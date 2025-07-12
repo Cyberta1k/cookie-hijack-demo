@@ -1,0 +1,25 @@
+title: Suspicious Execution of Cookie Extraction Tool
+id: 7c521c0b-0f91-4b2e-bb28-2c7b59a8a184
+description: Detects execution of Python scripts or commands using browser-cookie3 or accessing Chrome cookie files, indicating possible cookie theft.
+status: experimental
+author: Abhiraj Singh
+date: 2025/07/12
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    Image|endswith:
+      - '\python.exe'
+      - '\python3.exe'
+  commandline|contains|all:
+    - 'browser-cookie3'
+    - 'chrome'
+  condition: selection
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1539
+  - attack.t1550.003
+falsepositives:
+  - Legitimate Python automation scripts working with cookies
