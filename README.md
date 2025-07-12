@@ -62,15 +62,55 @@ To locate cookies and other sensitive files:
 ```powershell
 Get-ChildItem "$env:LOCALAPPDATA\Google\Chrome\User Data\" -Recurse -Filter Cookies -ErrorAction SilentlyContinue
 ```
+## 2. 🔓 browser-cookie3
 
-### 2. **browser-cookie3**
+A Python tool that extracts and decrypts cookies from Chrome using the current user’s **DPAPI** context.
 
-A Python tool to decrypt Chrome cookies using the current user context.
+### 🧰 Requirements
+
+Install the required Python module:
 
 ```bash
 pip install browser-cookie3
-python -c "import browser_cookie3; print(browser_cookie3.chrome(domain_name='linkedin.com'))"
 ```
+### 🔍 Usage
+Run the provided script:
+
+```bash
+python python/decrypt_with_browser_cookie3.py
+```
+You will be prompted to enter a domain (e.g., linkedin.com). The script will print decrypted cookies, including:
+
+✅ li_at – LinkedIn session cookie (often used in MFA bypasses)
+
+✅ li_rm, lidc, JSESSIONID, and others
+
+> **🔒 Important**: Run the script under the same Windows user account where Chrome cookies were originally created. DPAPI decryption is user-context specific.
+
+---
+### 🛠️ Manual Cookie Injection for Session Hijacking
+
+After extracting the plaintext cookie value (e.g., `li_at`), you can manually inject it into a browser to hijack the session:
+
+1. Open your browser (Chrome recommended).
+2. Navigate to the LinkedIn website: `https://www.linkedin.com`.
+3. Open **Developer Tools**:
+   - Press `F12` or `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Option+I` (Mac).
+4. Go to the **Application** tab.
+5. Under **Storage** (left sidebar), select **Cookies** > `https://www.linkedin.com`.
+6. In the cookie list, click **Add** (usually a "+" icon or right-click > "Add").
+7. Create a new cookie with these details:
+   - **Name:** `li_at`  
+   - **Value:** `<paste_the_extracted_li_at_cookie_value_here>`  
+   - **Domain:** `.linkedin.com`  
+   - **Path:** `/`  
+   - **Secure:** Checked  
+   - **HttpOnly:** Checked (if possible)  
+8. Refresh the LinkedIn page or open a new tab for `https://www.linkedin.com`.  
+9. You should now be logged in as the user associated with the injected cookie.
+
+> ⚠️ **Warning:** This technique bypasses normal login flows and MFA. Use responsibly and only in authorized environments.
+
 
 ---
 
